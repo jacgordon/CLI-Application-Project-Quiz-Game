@@ -5,8 +5,12 @@
 # The brief is in PROJECT.md.
 from menu import show_menu
 
+
 def main():
+    print("Javon's Trivia Game!")
     show_menu()
+    print("\nGoodbye!")
+    
 
 
 if __name__ == "__main__":

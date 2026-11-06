@@ -1,35 +1,29 @@
+from quiz_data import run_test, view_scores
 def show_menu():
-    print("Javon's Trivia Game!")
-    print("\nMain Menu:")
-    print("1. Start Quiz")
-    print("2. View High Scores")
-    print("3. Change Subject")
-    print("4. Quit")
-
     while True:
-        subject = input("\nChoose an option 1-4: ").strip()
+        print("\nMain Menu:")
+        print("1. Start Quiz")
+        print("2. View High Scores")
+        print("3. Change Subject")
+        print("4. Quit")
+        choice = input("\nChoose an option 1-4: ").strip()
 
         try:
-            subject = int(subject)
+            choice = int(choice)
         except ValueError:
             print("Invalid subject.")
             continue
 
-        if subject == 1:
-            print("this works!")
+        if choice == 1:
+            run_test()
             break
-        elif subject == 2:
-            print("this works!")
-            break
-        elif subject == 3:
-            subject_changer()
-            print("\n1. Start Quiz")
-            print("2. View High Scores")
-            print("3. Change Subject")
-            print("4. Quit")
+        elif choice == 2:
+            view_scores()
             continue
-        elif subject == 4:
-            print("\nThank you for playing!")
+        elif choice == 3:
+            subject_changer()
+            continue
+        elif choice == 4:
             break
         else:
             print("Invalid subject.")
@@ -37,7 +31,7 @@ def show_menu():
             
 
 def subject_changer():
-    print("\nSubjects:")
+    print("\nSubjects Menu:")
     print("1. Math")
     print("2. Science" )
     print("3. Spelling")
@@ -53,17 +47,13 @@ def subject_changer():
             continue
 
         if subject == 1:
-            print("this works!")
-            break
+            return subject
         elif subject == 2:
-            print("this works!")
-            break
+            return subject
         elif subject == 3:
-            print("this works!")
-            break
+            return subject
         elif subject == 4:
-            print("this works!")
-            break     
+            return subject     
         else:
             print("Invalid subject.")
             continue
