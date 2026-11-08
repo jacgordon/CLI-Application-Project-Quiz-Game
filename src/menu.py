@@ -7,7 +7,7 @@ def show_menu():
         print("2. View High Scores")
         print("3. Change Subject")
         print("4. Quit")
-        choice = input("\nChoose an option 1-4: ").strip()
+        choice = input("\nChoose an option (1-4): ").strip()
 
         try:
             choice = int(choice)
@@ -17,18 +17,15 @@ def show_menu():
 
         if choice == 1:
             run_test()
-            continue
         elif choice == 2:
             view_scores()
-            continue
         elif choice == 3:
             subject_changer()
-            continue
         elif choice == 4:
             break
         else:
             print("Invalid option.")
-            continue
+        
             
 
 def subject_changer():
@@ -39,7 +36,7 @@ def subject_changer():
     print("4. History")
 
     while True:
-        subject = input("\nChoose an option 1-4: ").strip()
+        subject = input("\nChoose an option (1-4): ").strip()
 
         try:
             subject = int(subject)

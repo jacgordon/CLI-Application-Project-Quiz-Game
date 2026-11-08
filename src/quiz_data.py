@@ -18,7 +18,7 @@ def run_test():
         print(question["choices"])
         
         while True:
-            choice = input("Enter your choice: ")
+            choice = input("Enter your choice (1-4): ")
             try:
                 choice = int(choice)
             except ValueError:
@@ -40,25 +40,31 @@ def run_test():
                 print("\nIncorrect.")
                 answered += 1
                 break
+        
         average = correct / answered * 100
         if number != len(questions):
-            print(f"Your current score is {correct}/{answered} {average}%")
+            print(f"Your current score is {correct}/{answered} {average:.2f}%")
         else:
             print("Quiz completed!")
-            print(f"Your final score was {correct}/{answered} {average}%")
+            print(f"Your final score was {correct}/{answered} {average:.2f}%")
+    
     if len(high_scores) != 5:
         print("Congratulations! You scored a high score!")
         name = input("Enter your name: ").strip()
         score = {"score": average, "name": name, "date": datetime.date.today().strftime("%m/%d/%y")}
         high_scores.append(score)
                 
-    
-
 
 def view_scores():
     if len(high_scores) == 0:
         print("There are no scores yet. Start a quiz!")
         return
 
-    for number, score in enumerate(high_scores, start=1):
+    scores_sorted = sorted(high_scores, key=get_score, reverse=True)
+    print("High scores:")
+    for number, score in enumerate(scores_sorted, start=1):
         print(f"{number}. {score['score']}% ({score['name']}) {score['date']}")
+
+
+def get_score(score):
+    return score["score"]
