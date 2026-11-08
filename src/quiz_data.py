@@ -1,8 +1,6 @@
 import datetime
 
-high_scores = [
-
-]
+high_scores = []
 
 questions = [
     {"question": "What is 100 + 100?", "choices": "1. 20 \n2. 200\n3. 2000\n4. 1000", "answer": 2},
@@ -42,17 +40,25 @@ def run_test():
                 print("\nIncorrect.")
                 answered += 1
                 break
+        average = correct / answered * 100
         if number != len(questions):
-            print(f"Your current score is {correct}/{answered} {correct/answered * 100:.2f}%")
+            print(f"Your current score is {correct}/{answered} {average}%")
         else:
             print("Quiz completed!")
-            print(f"Your final score was {correct}/{answered} {correct/answered * 100:.2f}%")
+            print(f"Your final score was {correct}/{answered} {average}%")
+    if len(high_scores) != 5:
+        print("Congratulations! You scored a high score!")
+        name = input("Enter your name: ").strip()
+        score = {"score": average, "name": name, "date": datetime.date.today().strftime("%m/%d/%y")}
+        high_scores.append(score)
+                
     
 
 
 def view_scores():
-    pass
+    if len(high_scores) == 0:
+        print("There are no scores yet. Start a quiz!")
+        return
 
-
-def add_score():
-    pass
+    for number, score in enumerate(high_scores, start=1):
+        print(f"{number}. {score['score']}% ({score['name']}) {score['date']}")

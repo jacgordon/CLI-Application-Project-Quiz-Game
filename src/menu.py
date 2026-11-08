@@ -1,4 +1,5 @@
 from quiz_data import run_test, view_scores
+
 def show_menu():
     while True:
         print("\nMain Menu:")
@@ -11,12 +12,12 @@ def show_menu():
         try:
             choice = int(choice)
         except ValueError:
-            print("Invalid subject.")
+            print("Invalid option.")
             continue
 
         if choice == 1:
             run_test()
-            break
+            continue
         elif choice == 2:
             view_scores()
             continue
@@ -26,7 +27,7 @@ def show_menu():
         elif choice == 4:
             break
         else:
-            print("Invalid subject.")
+            print("Invalid option.")
             continue
             
 
@@ -43,7 +44,7 @@ def subject_changer():
         try:
             subject = int(subject)
         except ValueError:
-            print("Invalid subject.")
+            print("Invalid option.")
             continue
 
         if subject == 1:
@@ -55,5 +56,5 @@ def subject_changer():
         elif subject == 4:
             return subject     
         else:
-            print("Invalid subject.")
+            print("Invalid option.")
             continue
