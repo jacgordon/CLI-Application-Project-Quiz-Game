@@ -6,7 +6,7 @@ def show_menu():
     current_test = None
     while True:
         print("\nMain Menu:")
-        print("1. Start Quiz")
+        print("1. Start Quiz (Choose a subject first!)")
         print("2. View High Scores")
         print("3. Choose Subject")
         print("4. Quit")
