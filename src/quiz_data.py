@@ -30,7 +30,7 @@ questions = [
         {"subject": "Spelling", "question": "Which is the spelling for one thousand years?", "choices": ["Millenium", "Milennium", "Milenium", "Millennium"], "answer_index": 3},
     ],
     [
-        {"subject": "History", "question": "Who was the third US president?", "choices": ["Abraham Lincoln", "Thomas Jefferson", "Abraham Lincoln", "George Washington"], "answer_index": 1},
+        {"subject": "History", "question": "Who was the third US president?", "choices": ["Abraham Lincoln", "Thomas Jefferson", "Thomas Edison", "George Washington"], "answer_index": 1},
         {"subject": "History", "question": "In which country did the Olympics originate?", "choices": ["Rome", "Egypt", "Greece", "Spain"], "answer_index": 2},
         {"subject": "History", "question": "Which treaty ended war between Germany and the Allied Powers in 1919?", "choices": ["Treaty of Versailles", "Treaty of Germany", "Treaty of Paris", "Treaty of Ghent"], "answer_index": 0},
         {"subject": "History", "question": "In which country did the Industrial Revolution begin?", "choices": ["United States", "France", "Germany", "Great Britain"], "answer_index": 3},
@@ -70,6 +70,7 @@ def run_test(test):
                 continue
             else:
                 print("\nIncorrect.")
+                print(f"The correct answer was number {question['answer_index'] + 1}")
                 answered += 1
                 break
 
@@ -98,7 +99,6 @@ def run_test(test):
 
     high_scores.sort(key=get_score, reverse=True)
                 
-
 def view_scores():
     if len(high_scores) == 0:
         print("\nThere are no scores yet. Start a quiz!")
@@ -108,7 +108,7 @@ def view_scores():
     for number, score in enumerate(high_scores, start=1):
         print(f"{number}. {score['subject']} {score['score']}% ({score['name']}) {score['date']}")
 
-# Allows the .sort() argument `key=` to get the "score" value of each dictionary and sort the dictonaries from highest score to lowest score.
+# Allows the .sort() method `key=` to get the "score" value of each dictionary and sort the dictonaries from highest score to lowest score.
 def get_score(score):
     return score["score"]
 
