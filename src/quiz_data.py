@@ -1,7 +1,11 @@
 import datetime
 
+import time
+
+# Empty list which will store future high scores
 high_scores = []
 
+# The list of each subject and its questions. Each subject is a list which contains dictionaries with records of each question.
 questions = [
     [
         {"subject": "Math", "question": "What is 100 + 100?", "choices": [20, 200, 2000, 1000], "answer_index": 1},
@@ -39,7 +43,12 @@ def run_test(test):
     correct = 0
     answered = 0
 
+    # Loops through each question in the subject, takes account of the question number as well.
+    #`start=1` for user readability so question numbers start incrementing from 1 instead of 0.
     for number, question in enumerate(questions[test - 1], start=1):
+        
+        # Keeps prompting user to enter a choice if input is not 1-4.
+        # Reprints the question if choice is invalid for user read
         while True:
             print(f"Q{number}. {question['question']}")
             for i in range(4):
@@ -63,9 +72,12 @@ def run_test(test):
                 print("\nIncorrect.")
                 answered += 1
                 break
-        
+
         average = correct / answered * 100
-        if number != len(questions[test - 1]):
+
+        # Check to see if the question number is less than the number of questions. Prints "current" if True.
+        # Prints "final" when False.
+        if number < len(questions[test - 1]):
             print(f"Your current score is {correct}/{answered} {average:.2f}%")
         else:
             print("Quiz completed!")
@@ -96,7 +108,7 @@ def view_scores():
     for number, score in enumerate(high_scores, start=1):
         print(f"{number}. {score['subject']} {score['score']}% ({score['name']}) {score['date']}")
 
-
+# Allows the .sort() argument `key=` to get the "score" value of each dictionary and sort the dictonaries from highest score to lowest score.
 def get_score(score):
     return score["score"]
 
@@ -104,12 +116,16 @@ def get_score(score):
 def subject_changer(subject):
     while True:
         if subject == "1":
+            print("Subject changed to Math.")
             return int(subject)
         elif subject == "2":
+            print("Subject changed to Science.")
             return int(subject)
         elif subject == "3":
+            print("Subject changed to Spelling.")
             return int(subject)
         elif subject == "4":
+            print("Subject changed to History.")
             return int(subject)     
         else:
             print("Invalid option.")
