@@ -3,38 +3,61 @@ import datetime
 high_scores = []
 
 questions = [
-    {"question": "What is 100 + 100?", "choices": "1. 20 \n2. 200\n3. 2000\n4. 1000", "answer": 2},
-    {"question": "What is 9 * 6?", "choices": "1. 45  \n2. 63\n3. 54\n4. 56", "answer": 3},
-    {"question": "What is 11 * 11?", "choices": "1. 121 \n2. 111\n3. 101\n4. 110", "answer": 1},
-    {"question": "What is 119 / 17?", "choices": "1. 6.23 \n2. 7\n3. 9\n4. 8.21", "answer": 2},
-    {"question": "What is 73 - 29?", "choices": "1. 46 \n2. 53\n3. 54\n4. 44", "answer": 4},
+    [
+        {"subject": "Math", "question": "What is 100 + 100?", "choices": [20, 200, 2000, 1000], "answer_index": 1},
+        {"subject": "Math", "question": "What is 9 * 6?", "choices": [45, 63, 54, 56], "answer_index": 2},
+        {"subject": "Math", "question": "What is the square root of 64?", "choices": [8, 4, 16, 32], "answer_index": 0},
+        {"subject": "Math", "question": "What is 119 / 17?", "choices": [8, 7, 9, 6], "answer_index": 1},
+        {"subject": "Math", "question": "What is 73 - 29?", "choices": [46, 53, 54, 44], "answer_index": 3},
+    ],
+    [
+        {"subject": "Science", "question": "What is the powerhouse of the cell?", "choices": ["Mitochondria", "Nucleus", "Ribosomes", "Cytoplasm"], "answer_index": 0},
+        {"subject": "Science", "question": "What is the chemical symbol for the element gold?", "choices": ["Ag", "Fe", "Go", "Au"], "answer_index": 3},
+        {"subject": "Science", "question": "What is the largest organ of the human body?", "choices": ["Brain", "Skin", "Liver", "Femur"], "answer_index": 1},
+        {"subject": "Science", "question": "At what temperature does water freeze in Celsius?", "choices": ["100 degrees", "-100 degrees", "32 degrees", "0 degrees"], "answer_index": 3},
+        {"subject": "Science", "question": "What is the closest planet to the sun?", "choices": ["Venus", "Mars", "Mercury", "Saturn"], "answer_index": 2},
+        
+    ],
+    [
+        {"subject": "Spelling", "question": "Which word is spelled correctly?", "choices": ["Acommodation", "Accomodation", "Acomodation", "Accommodation"], "answer_index": 3},
+        {"subject": "Spelling", "question": "Which word is spelled correctly?", "choices": ["Separate", "Seperate", "Separete", "Sepperate"], "answer_index": 0},
+        {"subject": "Spelling", "question": "Which word is spelled correctly?", "choices": ["Recieve", "Receive", "Riceive", "Reseive"], "answer_index": 1},
+        {"subject": "Spelling", "question": "What is the name of the head of a school?", "choices": ["Principal", "Principle", "Princepal", "Principl"], "answer_index": 0},
+        {"subject": "Spelling", "question": "Which is the spelling for one thousand years?", "choices": ["Millenium", "Milennium", "Milenium", "Millennium"], "answer_index": 3},
+    ],
+    [
+        {"subject": "History", "question": "Who was the third US president?", "choices": ["Abraham Lincoln", "Thomas Jefferson", "Abraham Lincoln", "George Washington"], "answer_index": 1},
+        {"subject": "History", "question": "In which country did the Olympics originate?", "choices": ["Rome", "Egypt", "Greece", "Spain"], "answer_index": 2},
+        {"subject": "History", "question": "Which treaty ended war between Germany and the Allied Powers in 1919?", "choices": ["Treaty of Versailles", "Treaty of Germany", "Treaty of Paris", "Treaty of Ghent"], "answer_index": 0},
+        {"subject": "History", "question": "In which country did the Industrial Revolution begin?", "choices": ["United States", "France", "Germany", "Great Britain"], "answer_index": 3},
+        {"subject": "History", "question": "Which explorer's crew completed the first sail around the entire world?", "choices": ["Marco Polo", "Christopher Columbus", "Vasco da Gama", "Ferdinand Magellan"], "answer_index": 3},
+    ]
 ]
 
-def run_test():
+
+def run_test(test):
     correct = 0
     answered = 0
-    for number, question in enumerate(questions, start=1):
-        print(f"Q{number}. {question['question']}")
-        print(question["choices"])
-        
+
+    for number, question in enumerate(questions[test - 1], start=1):
         while True:
-            choice = input("Enter your choice (1-4): ")
+            print(f"Q{number}. {question['question']}")
+            for i in range(4):
+                print(f"{i + 1}) {question["choices"][i]}")
+            
             try:
-                choice = int(choice)
+                choice = int(input("Enter your choice (1-4): ").strip()) - 1
             except ValueError:
                 print("Invalid option, please try again.\n")
-                print(question["question"])
-                print(question["choices"])
                 continue
-            if choice == question["answer"]:
+            
+            if choice == question["answer_index"]:
                 print("\nCorrect!")
                 answered += 1
                 correct += 1
                 break
-            elif choice not in range(1, 5):
+            elif choice not in range(4):
                 print("Invalid option, please try again.\n")
-                print(question["question"])
-                print(question["choices"])
                 continue
             else:
                 print("\nIncorrect.")
@@ -42,7 +65,7 @@ def run_test():
                 break
         
         average = correct / answered * 100
-        if number != len(questions):
+        if number != len(questions[test - 1]):
             print(f"Your current score is {correct}/{answered} {average:.2f}%")
         else:
             print("Quiz completed!")
@@ -51,20 +74,43 @@ def run_test():
     if len(high_scores) != 5:
         print("Congratulations! You scored a high score!")
         name = input("Enter your name: ").strip()
-        score = {"score": average, "name": name, "date": datetime.date.today().strftime("%m/%d/%y")}
+        score = {"subject": questions[test - 1][0]["subject"], "score": average, "name": name, "date": datetime.date.today().strftime("%m/%d/%y")}
         high_scores.append(score)
+    
+    if len(high_scores) == 5 and average > high_scores[-1]["score"]:
+        high_scores.pop()
+        print("Congratulations! You scored a high score!")
+        name = input("Enter your name: ").strip()
+        score = {"subject": questions[test - 1][0]["subject"], "score": average, "name": name, "date": datetime.date.today().strftime("%m/%d/%y")}
+        high_scores.append(score)
+
+    high_scores.sort(key=get_score, reverse=True)
                 
 
 def view_scores():
     if len(high_scores) == 0:
-        print("There are no scores yet. Start a quiz!")
+        print("\nThere are no scores yet. Start a quiz!")
         return
 
-    scores_sorted = sorted(high_scores, key=get_score, reverse=True)
     print("High scores:")
-    for number, score in enumerate(scores_sorted, start=1):
-        print(f"{number}. {score['score']}% ({score['name']}) {score['date']}")
+    for number, score in enumerate(high_scores, start=1):
+        print(f"{number}. {score['subject']} {score['score']}% ({score['name']}) {score['date']}")
 
 
 def get_score(score):
     return score["score"]
+
+
+def subject_changer(subject):
+    while True:
+        if subject == "1":
+            return int(subject)
+        elif subject == "2":
+            return int(subject)
+        elif subject == "3":
+            return int(subject)
+        elif subject == "4":
+            return int(subject)     
+        else:
+            print("Invalid option.")
+            break

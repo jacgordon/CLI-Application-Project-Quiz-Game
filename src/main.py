@@ -9,7 +9,7 @@ from menu import show_menu
 def main():
     print("Javon's Trivia Game!")
     show_menu()
-    print("\nGoodbye!")
+    print("\nThanks for playing!")
     
 
 
