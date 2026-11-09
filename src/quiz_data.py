@@ -83,13 +83,16 @@ def run_test(test):
         else:
             print("Quiz completed!")
             print(f"Your final score was {correct}/{answered} {average:.2f}%")
-    
+
+    # Always prompts the user they earned a high score if there aren't five scores yet.
     if len(high_scores) != 5:
         print("Congratulations! You scored a high score!")
         name = input("Enter your name: ").strip()
         score = {"subject": questions[test - 1][0]["subject"], "score": average, "name": name, "date": datetime.date.today().strftime("%m/%d/%y")}
         high_scores.append(score)
-    
+
+    # If there are 5 scores, checks to see if current score is greater than the lowest score in `high_scores`.
+    # If True, remove the lowest score and add the current score.
     if len(high_scores) == 5 and average > high_scores[-1]["score"]:
         high_scores.pop()
         print("Congratulations! You scored a high score!")
@@ -97,6 +100,7 @@ def run_test(test):
         score = {"subject": questions[test - 1][0]["subject"], "score": average, "name": name, "date": datetime.date.today().strftime("%m/%d/%y")}
         high_scores.append(score)
 
+# Sorts the `high_scores` list by score from highest to lowest.
     high_scores.sort(key=get_score, reverse=True)
                 
 def view_scores():
