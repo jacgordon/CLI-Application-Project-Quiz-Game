@@ -31,6 +31,7 @@ def show_menu():
         else:
             print("Invalid option.")
 
-        input("\nPress Enter key to continue.")
+        input("\nPress Enter to continue...")
 
+        # Clears output so messages don't pile up.
         os.system("clear")
