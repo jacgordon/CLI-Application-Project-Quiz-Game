@@ -13,7 +13,7 @@ def show_menu():
         choice = input("\nChoose an option (1-4): ").strip()
 
         if choice == "1":
-            run_test(current_test) if current_test else print("\nChoose a subject first!")
+            run_test(current_test) if current_test else print("\nSubject not chosen yet.")
         elif choice == "2":
             view_scores()
         elif choice == "3":

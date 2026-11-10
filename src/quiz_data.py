@@ -53,9 +53,15 @@ def run_test(test):
             print(f"Q{number}. {question['question']}")
             for i in range(4):
                 print(f"{i + 1}) {question["choices"][i]}")
+
+            # Ends the quiz early
+            choice = input("Enter your choice 1-4 (q to quit early): ").strip().lower()
+            if choice == "q":
+                    print("Quiz ended early. Progress not saved.")
+                    return
             
             try:
-                choice = int(input("Enter your choice (1-4): ").strip()) - 1
+                choice = int(choice) - 1
             except ValueError:
                 print("Invalid option, please try again.\n")
                 continue
