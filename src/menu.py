@@ -26,7 +26,7 @@ def show_menu():
             subject = input("\nChoose an option (1-4): ").strip()
             current_test = subject_changer(subject)
         elif choice == "4":
-            input("\nPress Enter key to continue.")
+            input("\nPress Enter to continue...")
             break
         else:
             print("Invalid option.")
